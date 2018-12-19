@@ -3,6 +3,7 @@ Flask Auth0 Example
 
 [![image](https://travis-ci.org/sandtable/flask-auth0.svg?branch=master)](http://travis-ci.org/sandtable/flask-auth0)
 [![image](https://codecov.io/github/sandtable/flask-auth0/coverage.svg?branch=master)](https://codecov.io/github/sandtable/flask-auth0?branch=master)
+[![image](https://img.shields.io/pypi/pyversions/flask-auth0.svg)](https://pypi.python.org/pypi/flask-auth0)
 
 Auth0 Flask extension
 

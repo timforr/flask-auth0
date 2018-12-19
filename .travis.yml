@@ -17,16 +17,20 @@ matrix:
 install:
   - pip install -r requirements.txt
   - pip install tox
-script: tox
-# deploy:
-#   provider: pypi
-#   user: "Your username"
-#   password:
-#     secure: "Your encrypted password"
-#   distributions: "sdist bdist_wheel"
-#   on:
-#     tags: true
-#     branch: master
+script: 
+  - tox
+  - python setup.py bdist_wheel
+deploy:
+  provider: pypi
+  user: sandtable
+  password:
+    secure: "LTV7Ye4eRP+J8vgVxfup4WN6g23B2tAA3D5aAXPh33OoPwIdL7vTF6RNC7SY3/nu5nd12hYy0oV3OLWt7X4ZNvlY4TJeTLh8XsB0hM4xfxL+cpAWT/4ngTiTgMrfNk9+4gMPQ+ZGw8cYBrHQl2JPD6pd+aL2AMQmpyctai6xmGkIZ/7Ga9bkE462c2Mm2GYjxAxBsiZ+52BaBVW+F9hwJGbAUy5TD6Y2vinPb5gC7gpbuSo/LerH2hSNbkBrEanKZuDGfxGsLU6dL84FMUuvQOpl+K1JRM84bQvrrqEd0hegc+LxxAuqTD+OS1/pQrinQDzHnDDfgWO8NRjmyMW+eSVQnFJ1VGwiGariNfS+gY2fwQHBV+PVVaddZLTlg9Qzk0RoJ2hWEax8NUMM36DJZuVrbnl7/8+GbyimFQfr6yH4+h7AaxsEUSS7Fhora2xg9M2U2CkRtb9SJtvV7gO11NNUSJpSRiAKHjy8id7XUnQ3INFbA/O4nrWajREOIjMFHmr53XD/QOHgiplUjDw2vTHjtR7DXAWG/CXydHm4iq2Q1RhtzXjXUyk8pe7QMOTLkS8TBKN/eV2VnuUJF+WVe4JTBy/SY1WbHkzhSVSU6f+LqIT7NEn6g3Jid/TsmbWDcLHuK0cTYtKyVa2Dxq6Zj5RScOGZkvHNpDQRx8zZ3f4="
+  distributions: "bdist_wheel"
+  skip_existing: true
+  skip_cleanup: true
+  on:
+    tags: true
+    branch: master
 notifications:
   slack:
     secure: kZYw541tSw+eQ1xqXnP5ux3ndoYvwnyKlFbxKOPPijdS5/pPzjvgFOSuaiGl4RY749q8+fDvWAHukPOtpQiB2JTrFOhcPNqoun8fZhtOcCtEvpRRCKBroLg4pHiIfgdUAsz/Jl2BG9yrHlY68CsaAecirors3mj+uhmjM0sRu4ZdG1/hCCZQRU3LGXy+5YoU3Vc1LsbXOB2WXNbDRy4aNalvdF2rnfGJz0IBGpG7n391kqI6SbQQOAPJA+EFc5IVH40lc6zQL2byLQlP/PRGfOF5+UNIniLkWQX3Vr1wg6s3kRN5eg7x209kP6M3ClvECg8oq5klYt66b8GvvPPnEhbqq3V0QFgrLTou1+uPlS5Isy95BupOIgFBsvzfCgBtFpGjXYVeE12hPivccgjUkIboHlwakcAR6PsgVeekUjvkC2bgB6X6qKzjdIzQugzcbmsmsQWFXFU6r6YupuNYF34zL/n5PNBy+qCosvZc6REKC3qpj6E9NAZ9w1tOIE0rLsRKZRv6SBN/+TPZmAFnt36vKHwtkMgWprkPt+aX6lTPNdMFcevyw9XdOjUcJe3w+vMyIUxgBNPDjmSMF2fvjmrFcHx6zlUlrfS+N4VM/s2R7muarX2iO9x2fZ/t4yBQiwirWKgracE5DAB1N1OJ+OcCNSBhFTQ6HFYwBD7G9+s=
