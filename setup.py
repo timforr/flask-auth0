@@ -7,17 +7,17 @@ from setuptools import setup, find_packages
 setup(
     name='flask-auth0',
     license='MIT',
-    version='0.0.33',
+    version='0.1.0',
     description='A Flask extension for authenticating web applications using Auth0.',
     author='Samuel Lesuffleur',
     author_email='samuel@sandtable.com',
-    url='http://sandtable.com',
+    url='https://github.com/sandtable/flask-auth0',
     packages=find_packages(),
     platforms='any',
     include_package_data=False,
     install_requires=[
         'flask',
-        'authlib'
+        'authlib',
     ],
     tests_require=[
         'pytest'

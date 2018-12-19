@@ -4,3 +4,4 @@
 build/
 dist/
 flask_auth0.egg-info/
+/docs/_build
