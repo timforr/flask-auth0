@@ -1,0 +1,4 @@
+flask
+flask-oauthlib
+python-jose
+requests

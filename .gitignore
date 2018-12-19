@@ -1,0 +1,6 @@
+.tox/
+.eggs/
+.cache/
+build/
+dist/
+flask_auth0.egg-info/
