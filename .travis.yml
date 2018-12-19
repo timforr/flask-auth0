@@ -2,19 +2,21 @@ language: python
 cache: pip
 matrix:
   include:
-    - python: 2.7
-      env: TOXENV=py27
-    - python: 3.4
-      env: TOXENV=py34
-    - python: 3.5
-      env: TOXENV=py35
-    - python: 3.6
-      env: TOXENV=py36
-    - python: 3.7
-      env: TOXENV=py37
+  - python: 2.7
+    env: TOXENV=py27
+  - python: 3.4
+    env: TOXENV=py34
+  - python: 3.5
+    env: TOXENV=py35
+  - python: 3.6
+    env: TOXENV=py36
+  - python: 3.7
+    env: TOXENV=py37
+    sudo: true
+    dist: xenial
 install:
-  - pip install -r requirements.txt
-  - pip install tox
+- pip install -r requirements.txt
+- pip install tox codecov
 script: tox
 # deploy:
 #   provider: pypi
@@ -25,6 +27,7 @@ script: tox
 #   on:
 #     tags: true
 #     branch: master
-# notifications: 
-#   slack:
-#     secure: 
+after_success: codecov
+notifications:
+  slack:
+    secure: kZYw541tSw+eQ1xqXnP5ux3ndoYvwnyKlFbxKOPPijdS5/pPzjvgFOSuaiGl4RY749q8+fDvWAHukPOtpQiB2JTrFOhcPNqoun8fZhtOcCtEvpRRCKBroLg4pHiIfgdUAsz/Jl2BG9yrHlY68CsaAecirors3mj+uhmjM0sRu4ZdG1/hCCZQRU3LGXy+5YoU3Vc1LsbXOB2WXNbDRy4aNalvdF2rnfGJz0IBGpG7n391kqI6SbQQOAPJA+EFc5IVH40lc6zQL2byLQlP/PRGfOF5+UNIniLkWQX3Vr1wg6s3kRN5eg7x209kP6M3ClvECg8oq5klYt66b8GvvPPnEhbqq3V0QFgrLTou1+uPlS5Isy95BupOIgFBsvzfCgBtFpGjXYVeE12hPivccgjUkIboHlwakcAR6PsgVeekUjvkC2bgB6X6qKzjdIzQugzcbmsmsQWFXFU6r6YupuNYF34zL/n5PNBy+qCosvZc6REKC3qpj6E9NAZ9w1tOIE0rLsRKZRv6SBN/+TPZmAFnt36vKHwtkMgWprkPt+aX6lTPNdMFcevyw9XdOjUcJe3w+vMyIUxgBNPDjmSMF2fvjmrFcHx6zlUlrfS+N4VM/s2R7muarX2iO9x2fZ/t4yBQiwirWKgracE5DAB1N1OJ+OcCNSBhFTQ6HFYwBD7G9+s=
