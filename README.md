@@ -1,6 +1,13 @@
 Flask Auth0 Example
 -------------------
 
+.. image:: https://travis-ci.org/sandtable/flask-auth0.svg?branch=master
+    :target: http://travis-ci.org/sandtable/flask-auth0
+    :alt: Build Status
+.. image:: https://codecov.io/github/sandtable/flask-auth0/coverage.svg?branch=master
+    :target: https://codecov.io/github/sandtable/flask-auth0?branch=master
+    :alt: Code Coverage
+
 Auth0 Flask extension
 
 # Example
