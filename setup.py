@@ -17,9 +17,7 @@ setup(
     include_package_data=False,
     install_requires=[
         'flask',
-        'flask-oauthlib',
-        'python-jose',
-        'requests',
+        'authlib'
     ],
     tests_require=[
         'pytest'
