@@ -1,9 +1,9 @@
 Flask-Auth0
 =============
 
-[![image](https://travis-ci.org/sandtable/flask-auth0.svg?branch=master)](http://travis-ci.org/sandtable/flask-auth0)
-[![image](https://codecov.io/github/sandtable/flask-auth0/coverage.svg?branch=master)](https://codecov.io/github/sandtable/flask-auth0?branch=master)
-[![image](https://img.shields.io/pypi/pyversions/flask-auth0.svg)](https://pypi.python.org/pypi/flask-auth0)
+[![Build Status](https://travis-ci.org/sandtable/flask-auth0.svg?branch=master)](http://travis-ci.org/sandtable/flask-auth0)
+[![Code Coverage](https://codecov.io/github/sandtable/flask-auth0/coverage.svg?branch=master)](https://codecov.io/github/sandtable/flask-auth0?branch=master)
+[![PyPI Version](http://img.shields.io/pypi/v/flask-auth0.svg)](https://pypi.python.org/pypi/flask-auth0)
 
 Flask-Auth0 is an extension for Flask that allows you to authenticate using the Auth0 service.
 
