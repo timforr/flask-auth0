@@ -1,4 +1,5 @@
-# Flask Auth0
+Flask-Auth0
+=============
 
 [![image](https://travis-ci.org/sandtable/flask-auth0.svg?branch=master)](http://travis-ci.org/sandtable/flask-auth0)
 [![image](https://codecov.io/github/sandtable/flask-auth0/coverage.svg?branch=master)](https://codecov.io/github/sandtable/flask-auth0?branch=master)
