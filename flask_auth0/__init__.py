@@ -89,11 +89,19 @@ class Auth0(object):
         try:
             state = json.loads(args['state'])
             destination = state['destination']
+            silent_auth = state.get('silent_auth')
         except (ValueError, KeyError) as e:
             logger.exception(e)
             raise AuthError('Invalid callback request')
 
         token = self._auth0.authorize_access_token()
+        if not token:
+            error_code = args['error']
+            error_desc = args['error_description']
+            message = "Authentication failed: '{}' (code='{}')".format(
+                error_desc, error_code)
+            raise AuthError(message, 401)
+
         resp = self._auth0.get('userinfo')
         userinfo = resp.json()
         flask.session[self._session_token_key] = token
