@@ -24,6 +24,11 @@ class AuthError(Exception):
         self.status_code = status_code
 
 
+SILENT_AUTH_ERROR_CODES = ('login_required',
+                           'interaction_required',
+                           'consent_required')
+
+
 class Auth0(object):
     """The core Auth0 client object."""
 
@@ -45,6 +50,7 @@ class Auth0(object):
         app.config.setdefault('AUTH0_SESSION_JWT_PAYLOAD_KEY', 'jwt_payload')
         app.config.setdefault('AUTH0_SESSION_TOKEN_KEY', 'auth0_token')
         app.config.setdefault('AUTH0_SCOPE', 'openid profile email')
+        app.config.setdefault('AUTH0_ENABLE_SILENT_AUTHENTICATION', False)
 
         self._client_id = app.config['AUTH0_CLIENT_ID']
         self._client_secret = app.config['AUTH0_CLIENT_SECRET']
@@ -60,6 +66,8 @@ class Auth0(object):
         self._session_token_key = app.config['AUTH0_SESSION_TOKEN_KEY']
         self._session_jwt_payload_key = \
             app.config['AUTH0_SESSION_JWT_PAYLOAD_KEY']
+        self._silent_auth_enabled = \
+            app.config['AUTH0_ENABLE_SILENT_AUTHENTICATION']
 
         self._auth0 = OAuth(app).register(
             'auth0',
@@ -98,6 +106,12 @@ class Auth0(object):
         if not token:
             error_code = args['error']
             error_desc = args['error_description']
+
+            if silent_auth is True and error_code in SILENT_AUTH_ERROR_CODES:
+                logger.warning("Silent authentication failed: '{}'".format(
+                    error_code))
+                self._redirect_to_auth_server(destination, silent=False)
+
             message = "Authentication failed: '{}' (code='{}')".format(
                 error_desc, error_code)
             raise AuthError(message, 401)
@@ -112,17 +126,28 @@ class Auth0(object):
         logger.debug('redirecting to `{}`'.format(next_url))
         return flask.redirect(next_url)
 
-    def _redirect_to_auth_server(self, destination):
+    def _redirect_to_auth_server(self, destination, silent=True):
         """Redirect to the auth0 server.
 
         Args:
            destination: URL to redirect user
+           silent: do silent authentication?
         """
-        state = json.dumps({"destination": destination})
+        state = {
+            'destination': destination,
+        }
+        params = {}
+
+        if silent is True and self._silent_auth_enabled:
+            state['silent_auth'] = True
+            params['prompt'] = 'none'
+
         return self._auth0.authorize_redirect(
             redirect_uri=self._callback_url,
             audience=self._audience,
-            state=state)
+            state=json.dumps(state),
+            **params
+        )
 
     def requires_auth(self, view_func):
         """Decorates view functions that require a user to be logged in."""
