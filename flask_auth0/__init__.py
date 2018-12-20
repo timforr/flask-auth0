@@ -8,6 +8,7 @@
 import json
 import logging
 from functools import wraps
+import time
 from six.moves.urllib.parse import urlencode, urlparse
 
 from authlib.flask.client import OAuth
@@ -119,7 +120,11 @@ class Auth0(object):
         """Decorates view functions that require a user to be logged in."""
         @wraps(view_func)
         def decorated(*args, **kwargs):
-            if self._session_token_key not in flask.session:
+            if not self.access_token:
+                logger.debug('user requires authentication')
+                return self._redirect_to_auth_server(flask.request.endpoint)
+            if int(time.time()) >= int(self.access_token['exp']):
+                logger.debug('token expired')
                 return self._redirect_to_auth_server(flask.request.endpoint)
             logger.debug('user is authenticated')
             return view_func(*args, **kwargs)
