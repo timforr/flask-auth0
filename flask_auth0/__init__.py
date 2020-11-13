@@ -10,7 +10,7 @@ import logging
 from functools import wraps
 from six.moves.urllib.parse import urlencode, urlparse
 
-from authlib.flask.client import OAuth
+from authlib.integrations.flask_client import OAuth
 import flask
 from flask import current_app
 
